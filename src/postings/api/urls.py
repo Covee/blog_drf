@@ -14,10 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import BlogPostRudView
+from .views import BlogPostRudView, BlogPostAPIView
 
 app_name = "api-postings"
 
 urlpatterns = [
+    path('', BlogPostAPIView.as_view(), name='post-create'),
     path('<int:pk>/', BlogPostRudView.as_view(), name='post-rud'),
 ]

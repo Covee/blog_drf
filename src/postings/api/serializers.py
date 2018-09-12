@@ -13,3 +13,5 @@ class BlogPostSerializer(serializers.ModelSerializer):		# JSON형식으로 conve
 			'content',
 			'timestamp',
 		]
+		read_only_fields = ['user']		# 수정 불가능하게 만듬
+		
