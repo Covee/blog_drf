@@ -2,6 +2,7 @@ from django.db.models import Q
 from rest_framework import generics, mixins
 
 from postings.models import BlogPost
+from .permissions import IsOwnerOrReadOnly
 from .serializers import BlogPostSerializer
 
 
@@ -29,6 +30,7 @@ class BlogPostAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 class BlogPostRudView(generics.RetrieveUpdateDestroyAPIView):
 	lookup_field 		= 'pk'
 	serializer_class 	= BlogPostSerializer
+	permission_classes	= [IsOwnerOrReadOnly]		# owner, 즉 user를 제외한 접근은 read only. it's all about permissions
 
 	def get_queryset(self):
 		return BlogPost.objects.all()
